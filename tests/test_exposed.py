@@ -117,6 +117,24 @@ class TestDetectAnomalies:
         assert "is_anomaly" in result.columns
         assert "anomaly_score" in result.columns
         assert result["is_anomaly"].dtype == bool
+
+    def test_detect_with_iqr_method(self, simple_data):
+        """Should detect anomalies using IQR method."""
+        clean_data = ingest_data([simple_data])
+        result = detect_anomalies(clean_data, "temperature", method="iqr", threshold=1.5)
+
+        assert "is_anomaly" in result.columns
+        assert "anomaly_score" in result.columns
+        assert result["is_anomaly"].dtype == bool
+
+    def test_detect_with_rolling_method(self, simple_data):
+        """Should detect anomalies using rolling method."""
+        clean_data = ingest_data([simple_data])
+        result = detect_anomalies(clean_data, "temperature", method="rolling", threshold=3.0)
+
+        assert "is_anomaly" in result.columns
+        assert "anomaly_score" in result.columns
+        assert result["is_anomaly"].dtype == bool
     
     def test_returns_same_number_of_rows(self, simple_data):
         """Should return same number of rows as input."""

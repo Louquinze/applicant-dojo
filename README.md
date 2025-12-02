@@ -46,6 +46,30 @@ pip install -r requirements.txt
 pytest tests/test_exposed.py -v
 ```
 
+### Running the visual tools
+
+Once the core functions are implemented and tests are passing, you can explore the data and results visually:
+
+```bash
+# From the project root
+
+# 1) Static/seaborn plots of one sensor and summary metrics
+python -m src.plot --sensor temperature --method zscore --threshold 3.0
+
+# 2) Interactive Plotly dashboard
+python -m src.dashboard
+```
+
+The dashboard (`src/dashboard.py`) lets you:
+- Choose sensors and anomaly detection method/threshold
+- See normalized time series with anomalies highlighted
+- Inspect summary quality and anomaly-rate plots
+- Explore sensor relationships via a correlation heatmap
+
+Once the server is running, open your browser at:
+
+- `http://127.0.0.1:8050/` (or `http://localhost:8050/`)
+
 ## 📋 Your Tasks
 
 ### 1. Implement Core Functions
